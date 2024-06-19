@@ -30,7 +30,6 @@ const messageHandler = (event) => {
 			$('#iframe_1').focus();
 			setTimeout(function() {
 				handleSendCommands('eagleloaded', 'true');
-				// removeLoadingScreen();
 			}, 1000);
 			break;
 		case "_focus":

@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     //iframe.focus();
 
     iframe.addEventListener('blur', function() {
-        console.log("Iframe perdeu o foco (diretamente no iframe)");
+        console.log("Iframe focus lost!");
         setTimeout(function() {
             iframe.focus();
-            console.log("Foco reestabelecido!");
+            console.log("Iframe focus retrieved!");
         }, 1000);
     });
 
@@ -153,11 +153,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
 });
-
-/*
-
-window.e3ds.onEvent("clipboard", (data) => {
-	console.log("SUCESSO!");
-    console.log(data);
-});
-*/

@@ -12,10 +12,9 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
         const data = JSON.parse(event.data);
         console.log("Parsed data:", data);
         let command = String(data.cmd);
-        console.log("cmd é " + command);
+        console.log("Command is: " + command);
         
         if (command === 'url') {
-            console.log("Entrou em URL!");
             switch (data.value) {
                 case 'getlevel':
                     console.log("GET LEVEL CALLED!");
@@ -26,7 +25,7 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
                     handleSendCommands('checklevel', parent.levelname);
                     break;
                 case 'queries':
-                    console.log('Queries called!');
+                    console.log('QUERIES CALLED!');
                     viewMode();
                     autoRecord();
                     getSegment();
@@ -36,27 +35,30 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
             }
         } else if (command === 'progress') {
             updateProgressBarPercentage(data.value);
+
         } else if (command === 'removeloading') {
             removeLoadingScreen();
             console.log("REMOVE LOADING SCREEN CALLED!");
             handleSendCommands('loadingremoved', 'loadingremoved');
+
         } else if (command === 'receivedmessage') {
-            console.log('A resposta foi recebida pela unreal engine:' + data)
-            console.log('Dos dados recebidos pela unreal, temos [comando:' + data.cmd + ', ' + 'valor: ' + data.value + ']');
+            //console.log('A resposta foi recebida pela unreal engine:' + data)
+            //console.log('Dos dados recebidos pela unreal, temos [comando:' + data.cmd + ', ' + 'valor: ' + data.value + ']');
         } else if (command === 'clipboard') {
-            // Remover o foco do iframe e colocá-lo na janela principal
             var iframe = document.getElementById('iframe_1');
             if (iframe) {
                 iframe.blur();
             }
+
             window.focus();
             getClipboardValue();
-            console.log("CLIPBOARD CHAMADO!");
+            console.log("BOARDCLIP CALLED!");
+
         } else if (command === 'playlistinitialized') {
             console.log("Playlist initialized!");
         
         } else {
-            console.log("ENTROU NO ELSE!!!");
+            console.log("");
         }
 
 
