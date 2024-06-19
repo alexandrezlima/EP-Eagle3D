@@ -19,11 +19,11 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
             switch (data.value) {
                 case 'getlevel':
                     console.log("GET LEVEL CALLED!");
-                    handleSendCommands('loadlevel', 'L_CiscoLive24');
+                    handleSendCommands('loadlevel', parent.levelname);
                     break;
                 case 'checklevel':
                     console.log("CHECK LEVEL CALLED!");
-                    handleSendCommands('checklevel', 'L_Upfronts24_0408');
+                    handleSendCommands('checklevel', parent.levelname);
                     break;
                 case 'queries':
                     console.log('Queries called!');
