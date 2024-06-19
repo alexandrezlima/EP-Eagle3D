@@ -27,9 +27,9 @@ const messageHandler = (event) => {
 			onPlayBtnPressed();
 			break;
 		case "stage5_playBtnPressed":
-			$('#iframe_1').focus();
 			setTimeout(function() {
 				handleSendCommands('eagleloaded', 'true');
+				$('#iframe_1').focus();
 			}, 1000);
 			break;
 		case "_focus":

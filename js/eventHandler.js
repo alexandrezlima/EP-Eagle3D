@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	//const iframe = document.getElementById('iframe_1');
     //const iframeWindow = iframe.contentWindow;
 	var iframe = document.getElementById('iframe_1');
-    //iframe.focus();
+    iframe.focus();
 
     iframe.addEventListener('blur', function() {
         console.log("Iframe focus lost!");
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 imageContainer.remove();
 
             console.log("Loading screen removed!");
+            iframe.focus();
         }
 
 
