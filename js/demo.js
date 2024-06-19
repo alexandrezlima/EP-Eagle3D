@@ -33,7 +33,7 @@ const messageHandler = (event) => {
 			}, 1000);
 			break;
 		case "_focus":
-			//document.getElementById("iframe_1").focus();
+			document.getElementById("iframe_1").focus();
 			break;
 		case "isIframe":
 			let obj = {
@@ -67,7 +67,7 @@ window.addEventListener('message', messageHandler);
 
 window.addEventListener('message', (message) => {
 	if (message.data.type === '_focus') {
-		//document.getElementById("iframe_1").focus();
+		document.getElementById("iframe_1").focus();
 	}
 })
 
