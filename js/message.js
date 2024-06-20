@@ -30,6 +30,9 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
                     autoRecord();
                     getSegment();
                     break;
+                case 'unmutesound':
+                    //nothing
+                    break;
                 default:
                     handleOpenLink(data.value);
             }
@@ -58,6 +61,23 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
         } else if (command === 'playlistinitialized') {
             console.log("Playlist initialized!");
         
+        } else if (command === 'checkpreset') {
+            if (parent.preseturl != "") {
+                handleSendCommands("downloadpreset", parent.preseturl);
+            }        
+        } else if (command === 'share' && data.value != null && data.value != 'done' ) {
+            let text = url1.share;
+            const urlwithoutqueries = window.location.origin + window.location.pathname;
+            
+            const textarea = document.createElement("textarea");
+            textarea.value = urlwithoutqueries + text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+
+            handleSendCommands('share', 'done');
+            
         } else {
             console.log("");
         }
