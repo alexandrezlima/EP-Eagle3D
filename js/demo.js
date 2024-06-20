@@ -18,6 +18,7 @@ const messageHandler = (event) => {
 			break;
 		case "stage2_deQueued":
 			//loading screen 1 hides
+			removeLoadingText();
 			break;
 		case "stage3_slotOccupied":
 			break;
