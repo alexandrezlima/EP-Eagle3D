@@ -1,24 +1,20 @@
 const messageHandler = (event) => {
 	
 	if(!event.data.type) return;
-	const loaderStep1 = document.getElementById("loaderStep1");
-	const loaderStep2 = document.getElementById("loaderStep2");
-	const loaderStep3 = document.getElementById("loaderStep3");
-	const iframeElem = document.getElementById("iframe_1");
-	const sidebar = document.getElementById("sidebar");
 
 
 	console.log("received data event type " + event.data.type)
 	switch (event.data.type) {
 		case "ResponseFromUE4":
-			console.log("UE4->iframe: " + event.data.descriptor)
+			console.log("UE4->iframe: " + event.data.descriptor);
 			myHandleResponseFunction(event.data.descriptor);
 			break;
 		case "stage1_inqueued":
 			break;
 		case "stage2_deQueued":
 			//loading screen 1 hides
-			removeLoadingText();
+			//removeLoadingText();
+			startProgressText();
 			break;
 		case "stage3_slotOccupied":
 			break;
@@ -28,6 +24,7 @@ const messageHandler = (event) => {
 			onPlayBtnPressed();
 			break;
 		case "stage5_playBtnPressed":
+			removeLoadingText();
 			setTimeout(function() {
 				handleSendCommands('eagleloaded', 'true');
 				$('#iframe_1').focus();
@@ -45,21 +42,22 @@ const messageHandler = (event) => {
 			break;
 			
 		case "QueueNumberUpdated":
-			console.log("QueueNumberUpdated. New queuePosition: " +  event.data.queuePosition)
+			console.log("QueueNumberUpdated. New queuePosition: " +  event.data.queuePosition);
 			break;
 			
 		case "stage3_1_AppAcquiringProgress":
-			console.log("stage3_1_AppAcquiringProgress percent: " + JSON.stringify( event.data.percent))
+			console.log("stage3_1_AppAcquiringProgress percent: " + JSON.stringify( event.data.percent));
 			break;
 			
 		case "stage3_2_AppPreparationProgress":
-			console.log("stage3_2_AppPreparationProgress percent:" + JSON.stringify( event.data.percent))
+			console.log("stage3_2_AppPreparationProgress percent:" + JSON.stringify( event.data.percent));
 			break;	
 		case "shortCuts":
 			console.log("Key pressed");
 			break;
 		default:
 			//console.error("Unhandled message data type");
+			console.log(event.data.percent);
 			break;
 	}
 }
@@ -89,4 +87,29 @@ function sentMessage(message) {
 			value: message,
 	};
 	sendToIframe(obj);
+}
+
+
+function updateLoadingText(newText) {
+	const loadingText = document.getElementById('loadingText');
+	if (loadingText) {
+		loadingText.childNodes[0].textContent = newText;
+	}
+}
+
+function startProgressText() {
+	const duration = 10000; // 20 seconds
+	const interval = 100; // Update every 200 ms
+	const steps = duration / interval; // Total number of steps
+	let currentStep = 0;
+
+	const intervalId = setInterval(() => {
+		const progress = Math.min(100, Math.round((currentStep / steps) * 100));
+		updateLoadingText(`Launching Event Playground: ${progress}%`);
+		currentStep++;
+
+		if (currentStep > steps) {
+			clearInterval(intervalId);
+		}
+	}, interval);
 }
