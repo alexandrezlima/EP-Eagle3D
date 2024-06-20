@@ -65,8 +65,8 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
             if (parent.preseturl != "") {
                 handleSendCommands("downloadpreset", parent.preseturl);
             }        
-        } else if (command === 'share' && data.value != null && data.value != 'done' ) {
-            let text = url1.share;
+        } else if (command === 'share') {
+            let text = data.value;
             const urlwithoutqueries = window.location.origin + window.location.pathname;
             
             const textarea = document.createElement("textarea");
@@ -75,6 +75,8 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
             textarea.select();
             document.execCommand("copy");
             document.body.removeChild(textarea);
+
+            console.log("copied to clipboard");
 
             handleSendCommands('share', 'done');
             
