@@ -14,7 +14,7 @@ const messageHandler = (event) => {
 			break;
 		case "stage2_deQueued":
 			//loading screen 1 hides
-			//removeLoadingText();
+			removeLoadingText();
 			startProgressText();
 			break;
 		case "stage3_slotOccupied":
@@ -25,7 +25,8 @@ const messageHandler = (event) => {
 			onPlayBtnPressed();
 			break;
 		case "stage5_playBtnPressed":
-			//removeLoadingText();
+			removeLoadingText();
+			
 			setTimeout(function() {
 				handleSendCommands('eagleloaded', 'true');
 				$('#iframe_1').focus();
@@ -106,7 +107,7 @@ function startProgressText() {
 
 	const intervalId = setInterval(() => {
 		const progress = Math.min(100, Math.round((currentStep / steps) * 100));
-		updateLoadingText(`Launching Event Playground: ${progress}%`);
+		updateProgressBarPercentage(progress);
 		currentStep++;
 
 		if (currentStep > steps) {
