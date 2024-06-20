@@ -10,6 +10,7 @@ const messageHandler = (event) => {
 			myHandleResponseFunction(event.data.descriptor);
 			break;
 		case "stage1_inqueued":
+			updateLoadingText(`Connecting to server`);			
 			break;
 		case "stage2_deQueued":
 			//loading screen 1 hides
@@ -24,7 +25,7 @@ const messageHandler = (event) => {
 			onPlayBtnPressed();
 			break;
 		case "stage5_playBtnPressed":
-			removeLoadingText();
+			//removeLoadingText();
 			setTimeout(function() {
 				handleSendCommands('eagleloaded', 'true');
 				$('#iframe_1').focus();
@@ -90,7 +91,7 @@ function sentMessage(message) {
 }
 
 
-function updateLoadingText(newText) {
+window.updateLoadingText = function (newText) {
 	const loadingText = document.getElementById('loadingText');
 	if (loadingText) {
 		loadingText.childNodes[0].textContent = newText;

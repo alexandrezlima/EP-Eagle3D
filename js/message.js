@@ -34,6 +34,7 @@ window.HandleResponseFromUE4 = function(event)//process whatever u want to do wi
                     handleOpenLink(data.value);
             }
         } else if (command === 'progress') {
+            removeLoadingText();
             updateProgressBarPercentage(data.value);
 
         } else if (command === 'removeloading') {
