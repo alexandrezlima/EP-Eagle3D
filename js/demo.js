@@ -10,7 +10,7 @@ const messageHandler = (event) => {
 			myHandleResponseFunction(event.data.descriptor);
 			break;
 		case "stage1_inqueued":
-			updateLoadingText(`Connecting to server`);			
+			updateLoadingText(`Connecting to your playground`);			
 			break;
 		case "stage2_deQueued":
 			//loading screen 1 hides
