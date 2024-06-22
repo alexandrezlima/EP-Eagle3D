@@ -111,7 +111,9 @@ e3ds_controller.callbacks.onConfigAcquire = function () {
 }
 
 e3ds_controller.callbacks.onSessionExpired = function () {
-    self.location = "assets/pages/session-expired.htm";
+    const url = window.location.href;
+	localStorage.setItem('url', url);
+    self.location = "www.mile80.com/eventplayground/reload";
 }
 
 e3ds_controller.callbacks.onReceivingAppPreparationProgress = function (percent) {
